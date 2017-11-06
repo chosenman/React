@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>bla bla</title>
+  </head>
+  <body>
+    <div id='clock'></div>
+    <script type="text/javascript">
+
+    var options = {
+      timezone: 'UTC',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    };
+    var clock = document.getElementById("clock");
+    
+      function refresh(){
+        var time = new Date();
+        clock.innerHTML = time.toLocaleString("en-US", options);
+        setTimeout(refresh, 1000);
+      }
+
+      refresh()
+    </script>
+
+  </body>
+</html>

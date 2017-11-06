@@ -1,0 +1,36 @@
+
+
+// react for existing project
+
+	npm run start	// to run from client folder
+	pm2 start npm -- run start		// for ubuntu
+
+	npm run dist 	// make dist folder
+
+	npm intall 		// to install set of modules from package.json file
+
+	sudo mongod		// as usual
+
+	nodemon server.js
+
+
+	// after changing /etc/nginx/sites-enabled file
+	sudo service nginx restart
+
+
+	//
+
+	sudo ln -s /etc/nginx/sites-available/potr /etc/nginx/sites-enabled/potr
+
+
+
+
+	////////////
+
+	sudo npm install --save webpack-dev-server
+	--host http://yarik-deploy.com:8080
+	--host 0.0.0.0 --public yarik-deploy.com/potr
+
+
+	/////// LOGS /////////
+	pm2 logs npm --lines 100
