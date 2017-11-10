@@ -33,4 +33,13 @@
 
 
 	/////// LOGS /////////
-	pm2 logs npm --lines 100
+	pm2 logs npm --lines 500
+
+
+
+
+
+
+	///////////////
+
+	loadtest -c 400 --rps 1 -t 10 http://yarik-deploy.com/

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+
+    <div id="app"></div>
+
+    <script>
+
+    var options = {
+      timezone: 'UTC',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric'
+    };
+
+      var clock = document.getElementById("app");
+
+      function refresh(){
+        var time = new Date();
+
+        var now = time.toLocaleString("en-US", options);
+        ReactDOM.render( now, clock );
+        setTimeout(refresh, 1000);
+      }
+
+      refresh()
+
+
+
+
+    // var myButton = React.createElement('button', null, 'Click Me!');
+    // console.log(JSON.stringify(myButton));
+    // ReactDOM.render(myButton, document.getElementById('app'));
+    </script>
+
+
+
+
+  </body>
+</html>
