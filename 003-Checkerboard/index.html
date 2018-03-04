@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+
+    <div id="app"></div>
+
+    <script>
+    var selector = document.getElementById("app");
+
+    var styles = {
+      row: {height: '20px'},
+      cell: {height: '20px', width: '20px', display:'inline-block'},
+      colorA: {backgroundColor: 'black'},
+      colorB: {backgroundColor: 'red'}
+    }
+
+
+      function Cell (props) {
+          console.log("cel run");
+          // props.children.num
+          return React.createElement('div', null, "cell")
+      }
+      function Row (props) {
+          console.log(props.num + " from row"); // props.num
+          var calls = Number(props.num);
+          var allCellsInRow = [];
+          for (var i = 0; i < calls; i++) {
+            allCellsInRow.push( React.createElement(Cell, null, { num: calls } ) )
+          }
+          var numRows = 5;
+          /* .map array with Cell  */
+          const { num } = props;
+          return React.createElement('div', null, allCellsInRow.map((cell,index) => {
+            return key = {index}
+          })
+        )
+      }
+      function CheckerBoard (props) {
+          console.log(props + " from CheckerBoard");
+          var rows = Number(props);
+          var rowsArray = [];
+          for (var i = 0; i < rows; i++) {
+            rowsArray.push( React.createElement(Row, { num: props }) )
+          }
+          return React.createElement('div', null, rowsArray )
+      }
+
+      var size = prompt("Specify the size of checkerboard:");
+
+      function render(arg){
+        console.log(arg);
+        var arr  = new Array(arg);
+        for (var i = 0; i < arr.length; i++) {
+          arr[i] = new Array(arg);
+        }
+        // ['1', '2', '3'].map(Number)
+        // for (var i = 0; i < arr.length; i++) {
+        //   arr[i]
+        // }
+        ReactDOM.render( CheckerBoard(arg), selector )
+      }
+
+      render(size)
+
+    </script>
+
+  </body>
+</html>

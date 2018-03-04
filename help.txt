@@ -17,11 +17,13 @@
 	// after changing /etc/nginx/sites-enabled file
 	sudo service nginx restart
 
+	// GIT COMMAND
+	git pull origin develop
 
 	//
 
 	sudo ln -s /etc/nginx/sites-available/potr /etc/nginx/sites-enabled/potr
-
+	sudo ln -s /etc/nginx/sites-available/shooter.yarik-deploy.com /etc/nginx/sites-enabled/shooter.yarik-deploy.com
 
 
 
@@ -36,9 +38,14 @@
 	pm2 logs npm --lines 500
 
 
+	/////// COPY FILE AND RENAME ///////
+	cp program3.cpp homework6.cpp
 
 
 
+	/// moving files ///
+	sudo mv package.json ../server/package.json
+	sudo mv server.js ../server/server.js 
 
 	///////////////
 
