@@ -16,58 +16,62 @@
 
     var styles = {
       row: {height: '20px'},
-      cell: {height: '20px', width: '20px', display:'inline-block'},
       colorA: {backgroundColor: 'black'},
-      colorB: {backgroundColor: 'red'}
+      colorB: {backgroundColor: 'red'},
+      getAccess: () => this.colorA.backgroundColor,
+      cellA: {height: '20px', width: '20px', display:'inline-block', background: "black"},
+      cellB: {height: '20px', width: '20px', display:'inline-block', background: "red" }
     }
 
 
-      function Cell (props) {
-          console.log("cel run");
-          // props.children.num
-          return React.createElement('div', null, "cell")
-      }
-      function Row (props) {
-          console.log(props.num + " from row"); // props.num
-          var calls = Number(props.num);
-          var allCellsInRow = [];
-          for (var i = 0; i < calls; i++) {
-            allCellsInRow.push( React.createElement(Cell, null, { num: calls } ) )
+      function Cell(props) {
+        var { text } = props;
+          if(text == 1){
+
+            return React.createElement('span', {style: styles.cellA}, "" );
+          } else {
+            return React.createElement('span', {style: styles.cellB}, "" );
           }
-          var numRows = 5;
-          /* .map array with Cell  */
-          const { num } = props;
-          return React.createElement('div', null, allCellsInRow.map((cell,index) => {
-            return key = {index}
-          })
-        )
+        }
+
+      function Row(props) {
+          var { list } = props;
+          return React.createElement('div', {style: styles.row},
+            list.map( (elem) => {
+              return React.createElement(Cell, { text: elem} );
+            } )
+          )
       }
-      function CheckerBoard (props) {
-          console.log(props + " from CheckerBoard");
-          var rows = Number(props);
-          var rowsArray = [];
-          for (var i = 0; i < rows; i++) {
-            rowsArray.push( React.createElement(Row, { num: props }) )
-          }
-          return React.createElement('div', null, rowsArray )
+
+      function CheckerBoard(boardParams) {
+
+        ReactDOM.render( React.createElement('div', null,
+                          boardParams.map( (elem) => {
+                            return React.createElement(Row, {list: elem} );
+                          } )),
+                          selector)
+
+      // debugging stuff
+        // var h = () => {
+        //   return React.createElement( Cell, {text: "Dynamic content! Hooray!"} )
+        // }
+        // ReactDOM.render( h(), selector)
       }
 
       var size = prompt("Specify the size of checkerboard:");
 
-      function render(arg){
-        console.log(arg);
-        var arr  = new Array(arg);
-        for (var i = 0; i < arr.length; i++) {
-          arr[i] = new Array(arg);
-        }
-        // ['1', '2', '3'].map(Number)
-        // for (var i = 0; i < arr.length; i++) {
-        //   arr[i]
-        // }
-        ReactDOM.render( CheckerBoard(arg), selector )
-      }
+      var num = (function(){
+          var arr =[];
+          for (var i = 0; i < size; i++) {
+            arr.push([]);
+            for (var y = 0; y < size; y++) {
+                arr[i][y] = (i%2 + y%2) % 2;
+            }
+          }
+          return arr;
+        })();
 
-      render(size)
+       CheckerBoard(num)
 
     </script>
 
