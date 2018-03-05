@@ -9,9 +9,12 @@
     <script src="node_modules/react/umd/react.development.js"></script>
     <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
 
+    <div id="root"></div>
     <div id="app"></div>
     <div id="app1"></div>
     <div id="app2"></div>
+    <div id="app3"></div>
+    <div id="app4"></div>
 
     <script>
 
@@ -26,16 +29,23 @@
         ReactDOM.render( hello_dojo, selector );
         ReactDOM.render( React.createElement('h2', null, 'Things I need to do:'), document.getElementById("app1") );
 
+        // =====================
+        // The essential example of embeding React elements into each another
+        // =====================
+
+          // JSX example
 
 
-      //   ReactDOM.render( React.createElement('ul', null,
-      //
-      //         React.createElement('li', null, 'Learn React Learn React'),
-      //         React.createElement('li', null, 'Climb Mt Everest'),
-      //         React.createElement('li', null, 'Run a marathon'),
-      //         React.createElement('li', null, 'Feed the dogs')
-      //
-      // ), document.getElementById("app2") );
+            ReactDOM.render( React.createElement('ul', null,
+                  [
+                    React.createElement('li', null, '0 Learn React Learn React'),
+                    React.createElement('li', null, '1 Climb Mt Everest'),
+                    React.createElement('li', null, '2 Run a marathon'),
+                    React.createElement('li', null, '3 Feed the dogs')
+                  ]
+
+          ), document.getElementById("app4") );
+
 
       var listSelector = document.getElementById("app2");
 
@@ -46,17 +56,36 @@
             'Feed the dogs'
       ];
 
-      var List = (props) => {
-        var { text } = props;
-        return React.createElement('ul', null, text);
-      }
-      var Item = (props) => {
-        return React.createElement( List, {text: "Dynamic content! Hooray!"} );
-      }
+      // =====================
+      // React functional programming simple Example
+      // =====================
+          var List = (props) => {
+            var { text } = props;
+            return React.createElement('li', null, text);
+          }
+          // old style
+            var ListOld = function(prop){
+              var text = prop.text ;
+              return React.createElement("li", null, text)
+            }
 
-      ReactDOM.render( items.map( (item) => {
-        return React.createElement( List, {text: item} );
-      } ), listSelector )
+          var Item = (props) => {
+            return React.createElement( ListOld, {text: "Dynamic content! Hooray!"} );
+          }
+
+        ReactDOM.render( Item(), document.getElementById("app3") );
+
+        // =====================
+        // Advenced example of functional programming approach in REAC
+        // ReactDOM.render( React.createElement, selector )
+        // React.createElement( "ul", null, "text" | React.createElement | [ array of React.elems] )
+        // React.createElement( callbackFunction, argumentForThatFunction )
+        // =====================
+              ReactDOM.render( React.createElement('ul', null,
+                          items.map( (item) => {
+                            return React.createElement( ListOld, {text: item} );
+                          } ) ),
+                        listSelector )
 
 
     // console.log(JSON.stringify(myButton));
