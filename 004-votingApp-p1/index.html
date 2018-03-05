@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+
+    event example
+    <div id="content"></div>
+
+    <hr>
+    App:
+    <div id="app"></div>
+
+    <script >
+
+    // const buttonProps = {
+    //   onClick() { alert('You clicked me!'); } // ES6 method definition! See https://developer.mozilla.org/...
+    // }
+    // ReactDOM.render(
+    //   React.createElement('button', buttonProps, 'Click me!'),
+    //   document.getElementById('content')
+    // );
+
+    var selector = document.getElementById("app");
+
+    var voteLib = [
+      [0, "React"],
+      [0, "Vue"],
+      [0, "Angular"],
+      [0, "Ember"]
+    ];
+
+    // EVENTS example
+        var vote =(id) => {
+            console.log(id);
+            voteLib[id][0] += 1;
+            runner()
+        }
+
+
+        var styles = {
+          countainer: { margin:"0 auto", width:"200px"},
+          row: { border:"1px solid black"},
+          counter: { display:"inline-block",  background:"#ccc", padding:"5px"}
+        }
+
+
+
+        var Row = (props) =>{
+          var {row, id} = props
+          return React.createElement(
+              "div",
+              { style: styles.row },
+              React.createElement(
+                "span",
+                { style: styles.counter },
+                row[0]
+              ),
+              row[1],
+              React.createElement('button', {onclick: "vote(id)" }, 'Vote!')
+            );
+        }
+
+        var Vote = (props) => {
+          var list = props;
+          return React.createElement('div',
+              {style: styles.countainer },
+              list.map( (elem, id) =>{
+                return React.createElement(Row, {row: elem, id: id});
+              } ))
+        }
+
+        var runner = () => {
+          ReactDOM.render( Vote(voteLib),selector );
+        }
+
+        runner();
+
+
+    </script>
+
+    <script type="text/jsx" >
+
+      // const List = (props) => {
+      //     const listItems = props.items.map((itemString) => {
+      //         return <li key={itemString}>{itemString}</li>
+      //     });
+      //     return (
+      //         <ul>
+      //             {listItems}
+      //         </ul>
+      //     )
+      // }
+      // ReactDOM.render(<List items= { ['React', 'Redux', 'Node', 'Express'] } />, document.getElementById('content'));
+
+    </script>
+
+  </body>
+</html>
