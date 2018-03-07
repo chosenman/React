@@ -29,40 +29,41 @@
     var selector = document.getElementById("app");
 
     var voteLib = [
-      [0, "React"],
-      [0, "Vue"],
-      [0, "Angular"],
-      [0, "Ember"]
+      {votes: 0, name: "React", onClick() { voteLib[0].votes++; runner(voteLib)} },
+      {votes: 0, name: "Vue", onClick() { voteLib[1].votes++; runner(voteLib)} },
+      {votes: 0, name: "Angular", onClick() { voteLib[2].votes++; runner(voteLib)} },
+      {votes: 0, name: "Ember", onClick() { voteLib[3].votes++; runner(voteLib)} }
     ];
 
     // EVENTS example
         var vote =(id) => {
             console.log(id);
             voteLib[id][0] += 1;
-            runner()
-        }
+            console.log(voteLib);
+            runner(voteLib);
+        };
 
 
         var styles = {
           countainer: { margin:"0 auto", width:"200px"},
           row: { border:"1px solid black"},
           counter: { display:"inline-block",  background:"#ccc", padding:"5px"}
-        }
-
-
+        };
 
         var Row = (props) =>{
-          var {row, id} = props
+          var {row, id} = props;
+          // console.log("id ", id);
+
           return React.createElement(
               "div",
-              { style: styles.row },
+              { style: styles.row, "key": id },
               React.createElement(
                 "span",
                 { style: styles.counter },
-                row[0]
+                row.votes
               ),
-              row[1],
-              React.createElement('button', {onclick: "vote(id)" }, 'Vote!')
+              row.name,
+              React.createElement('button', row, 'Vote!', )
             );
         }
 
@@ -75,11 +76,11 @@
               } ))
         }
 
-        var runner = () => {
-          ReactDOM.render( Vote(voteLib),selector );
+        var runner = (array) => {
+          ReactDOM.render( Vote(array), selector );
         }
 
-        runner();
+        runner(voteLib);
 
 
     </script>
