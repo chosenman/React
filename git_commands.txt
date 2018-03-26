@@ -1,0 +1,33 @@
+git status - shows you a summary of differences between your local project and the remote project
+
+git add . - adds all changes you made in the project to your commit (changes not committed yet)
+
+git add {insertFileName} - only adds specified file to your commit (rarely used)
+
+git reset - undos all added uncommitted files
+
+git branch - shows you the list of branches in the repo and highlights what branch you're currently working on
+
+git branch {insertBranchName} - creates a new local branch if it doesn't already exist
+
+git branch -d {insertBranchName} - deletes the specified local branch
+
+git checkout --track origin/{insertBranchName} - creates a new branch and links it with the remote branch with the same name
+
+git checkout {insertBranchName} - switches to specified branch if it exists
+
+git checkout -b {insertBranchName} - a combo of the last 2. creates a new branch if it doesn't already exist and switches you to it.
+
+git checkout -b {insertBranchName} development - same as above except it branches off of development branch, not master
+
+
+                *CAUTION - shit's permanent, yo*
+git commit -m "{insertComment}" - commits your changes on the current branch. Write your comment between the quotations
+
+git push -u origin master - pushes your commit to the remote master branch
+
+git push -u origin {insertBranchName} - pushes your commit to a specific remote branch
+
+git fetch {insertBranchName} - shows you what files you need to merge into your local repo in order to stay up to date with the specified branch of the remote repo
+
+git merge --no-ff {insertBranchName} - merges the remote files from the specified branch into your current branch. The "--no-ff" tells git to keep the commit history of both branches separate.
